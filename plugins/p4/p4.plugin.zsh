@@ -18,7 +18,10 @@ function _set_p4_client() {
     _p4_clean_precmd_functions
     _p4_have_cleaned=1
   fi
-  local p=$(pwd)
+  # local p=$(pwd) wont work
+  # see http://www.zsh.org/mla/users/2004/msg01308.html
+  local p;
+  p=$(pwd)
   # search for the file
   while [[ "$p" != "" && ! -e "$p/.p4client" ]]; do
     # it wasn't found so set p to p's parent directory
