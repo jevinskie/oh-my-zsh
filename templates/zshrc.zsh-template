@@ -80,12 +80,24 @@ ZSH_THEME="candy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+<<<<<<< HEAD
 plugins=(adb git rsync)
+||||||| parent of fd2cc54b (zshrc template more to my liking)
+plugins=(git)
+=======
+plugins=(git p4)
+>>>>>>> fd2cc54b (zshrc template more to my liking)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+<<<<<<< HEAD
+||||||| parent of fd2cc54b (zshrc template more to my liking)
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+=======
+#export PATH=$HOME/bin:/usr/local/bin:$PATH
+>>>>>>> fd2cc54b (zshrc template more to my liking)
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -109,6 +121,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+<<<<<<< HEAD
 
 # Automatically remove duplicates from these arrays
 typeset -U path cdpath fpath manpath
@@ -131,3 +144,8 @@ autoload -U compaudit && autoload -U compinit && compinit
 # zprof
 
 export PATH="$HOME/.poetry/bin:$PATH"
+||||||| parent of fd2cc54b (zshrc template more to my liking)
+=======
+
+# source ~/.my_rc
+>>>>>>> fd2cc54b (zshrc template more to my liking)
