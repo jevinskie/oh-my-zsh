@@ -121,7 +121,6 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-<<<<<<< HEAD
 
 # Automatically remove duplicates from these arrays
 typeset -U path cdpath fpath manpath
@@ -132,20 +131,10 @@ export SAVEHIST=$HISTSIZE
 setopt HIST_FIND_NO_DUPS
 
 
-# # The following lines were added by compinstall
-# zstyle :compinstall filename '/Users/jevin/.zshrc'
-
-# autoload -Uz compinit
-# compinit
-# # End of lines added by compinstall
-
 autoload -U compaudit && autoload -U compinit && compinit
 
 # zprof
 
-export PATH="$HOME/.poetry/bin:$PATH"
-||||||| parent of fd2cc54b (zshrc template more to my liking)
-=======
-
-# source ~/.my_rc
->>>>>>> fd2cc54b (zshrc template more to my liking)
+if [[ -r ~/.my_rc ]]; then
+	. ~/.my_rc
+fi
