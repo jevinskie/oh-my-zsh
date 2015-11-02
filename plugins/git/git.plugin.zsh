@@ -212,11 +212,13 @@ alias gsts='git stash show --text'
 alias gsu='git submodule update'
 
 alias gts='git tag -s'
+alias gtv='git tag | sort -V'
 
 alias gunignore='git update-index --no-assume-unchanged'
 alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
 alias gup='git pull --rebase'
 alias gupv='git pull --rebase -v'
+alias glum='git pull upstream master'
 
 alias gvt='git verify-tag'
 
