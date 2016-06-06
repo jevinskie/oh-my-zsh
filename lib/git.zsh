@@ -37,7 +37,9 @@ function git_remote_status() {
         ahead=$(command git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
         behind=$(command git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
 
-        if [[ $ahead -gt 0 ]] && [[ $behind -eq 0 ]]; then
+        if [[ $ahead -eq 0 ]] && [[ $behind -eq 0 ]]; then
+            git_remote_status="$ZSH_THEME_GIT_PROMPT_EQUAL_REMOTE"
+        elif [[ $ahead -gt 0 ]] && [[ $behind -eq 0 ]]; then
             git_remote_status="$ZSH_THEME_GIT_PROMPT_AHEAD_REMOTE"
             git_remote_status_detailed="$ZSH_THEME_GIT_PROMPT_AHEAD_REMOTE_COLOR$ZSH_THEME_GIT_PROMPT_AHEAD_REMOTE$((ahead))%{$reset_color%}"
         elif [[ $behind -gt 0 ]] && [[ $ahead -eq 0 ]]; then
@@ -184,6 +186,18 @@ function git_compare_version() {
     fi
   done
   echo 0
+}
+
+# Outputs the name of the current user
+# Usage example: $(git_current_user_name)
+function git_current_user_name() {
+  command git config user.name 2>/dev/null
+}
+
+# Outputs the email of the current user
+# Usage example: $(git_current_user_email)
+function git_current_user_email() {
+  command git config user.email 2>/dev/null
 }
 
 # This is unlikely to change so make it all statically assigned
