@@ -80,7 +80,7 @@ ZSH_THEME="candy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(adb ant cp docker gradle git mosh perl pip python sublime sudo virtualenv)
 
 # User configuration
 
