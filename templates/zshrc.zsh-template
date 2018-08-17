@@ -80,7 +80,7 @@ ZSH_THEME="candy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(adb ant cp docker gradle git mosh perl pip python sublime sudo virtualenv)
+plugins=(adb rsync)
 
 # User configuration
 
@@ -124,4 +124,8 @@ autoload -U compaudit && autoload -U compinit && compinit
 
 if [[ -r ~/.my_rc ]]; then
 	. ~/.my_rc
+fi
+
+if [[ -r ~/.iterm2_shell_integration.zsh ]]; then
+	. ~/.iterm2_shell_integration.zsh
 fi
