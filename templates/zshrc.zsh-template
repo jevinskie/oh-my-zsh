@@ -95,10 +95,21 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Automatically remove duplicates from these arrays
+typeset -U path cdpath fpath manpath
+
+export HISTSIZE=1000000
+export HISTFILESIZE=1000000
+setopt HIST_FIND_NO_DUPS
+
 if [[ -r ~/.my_rc ]]; then
 	. ~/.my_rc
 fi
 
 if [[ -r ~/.iterm2_shell_integration.zsh ]]; then
 	. ~/.iterm2_shell_integration.zsh
+fi
+
+if [ -e /usr/local/share/zsh-completions ]; then
+	fpath=(/usr/local/share/zsh-completions $fpath)
 fi
