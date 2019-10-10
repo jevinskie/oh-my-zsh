@@ -68,7 +68,7 @@ ZSH_THEME="candy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(adb rsync schroot)
+plugins=(adb rsync schroot virtualenv virtualenvwrapper)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,8 +101,8 @@ source $ZSH/oh-my-zsh.sh
 # Automatically remove duplicates from these arrays
 typeset -U path cdpath fpath manpath
 
-export HISTSIZE=1000000
-export HISTFILESIZE=1000000
+export HISTSIZE=1000000000
+export HISTFILESIZE=1000000000
 setopt HIST_FIND_NO_DUPS
 
 if [[ -r ~/.my_rc ]]; then
