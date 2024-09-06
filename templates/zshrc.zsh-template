@@ -1,9 +1,24 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-# zmodload zsh/zprof
+# Automatically remove duplicates from these arrays
+typeset -U path cdpath fpath manpath
 
-# Path to your oh-my-zsh installation.
+# zmodload zsh/zprof
+zmodload zsh/param/private
+
+# zmodload zsh/zprof
+zmodload zsh/param/private
+
+function source_bash {
+  emulate -L bash
+  builtin source "$@"
+}
+
+autoload -RUz compinit compaudit && compinit
+# autoload -Uz bashcompinit && bashcompinit
+
+# Path to your Oh My Zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load --- if set to "random", it will
@@ -72,11 +87,15 @@ ZSH_THEME="candy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(colored-man-pages rsync )
+if [[ -d $ZSH/custom/plugins/mx ]]; then
+	plugins+=(mx)
+fi
+
+source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -86,7 +105,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-#   export EDITOR='mvim'
+#   export EDITOR='nvim'
 # fi
 
 # Compilation flags
@@ -104,23 +123,28 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Automatically remove duplicates from these arrays
-typeset -U path cdpath fpath manpath
-
-export HISTSIZE=1000000000
+export HISTSIZE=100000
 export HISTFILESIZE=$HISTSIZE
 export SAVEHIST=$HISTSIZE
 setopt HIST_FIND_NO_DUPS
 
+fpath+=~/.zfunc
 
-autoload -U compaudit && autoload -U compinit && compinit
+zmodload zsh/complist
+autoload -RUz compinit compaudit && compinit
+# autoload -Uz bashcompinit && bashcompinit
 
-if [[ -r ~/.my_rc ]]; then
-	. ~/.my_rc
+if [[ -n "$ZSH_EXIT_AT_END_OF_ZSHRC" && ( "$ZSH_EXIT_AT_END_OF_ZSHRC" ) ]]; then
+  sw_vers
+  exit 3
 fi
 
-if [[ -e /usr/local/share/zsh-completions ]]; then
-	fpath=(/usr/local/share/zsh-completions $fpath)
-fi
+# deupe paths
+path=($path)
+cdpath=($cdpath)
+fpath=($fpath)
+manpath=($manpath)
+
+zstyle ':completion:*' menu select
 
 # zprof
