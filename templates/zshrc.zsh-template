@@ -7,9 +7,6 @@ typeset -U path cdpath fpath manpath
 # zmodload zsh/zprof
 zmodload zsh/param/private
 
-# zmodload zsh/zprof
-zmodload zsh/param/private
-
 function source_bash {
   emulate -L bash
   builtin source "$@"
@@ -18,8 +15,19 @@ function source_bash {
 autoload -RUz compinit compaudit && compinit
 # autoload -Uz bashcompinit && bashcompinit
 
+# if ! { autoload -RUz compinit compaudit && compinit }; then
+# 	echo -e "\033[31m.zshrc initial compinit failed\033[39m" &>2
+# fi
+# if ! { autoload -Uz bashcompinit && bashcompinit }; then
+# 	echo -e "\033[31m.zshrc initial bashcompinit failed\033[39m" &>2
+# fi
+
 # Path to your Oh My Zsh installation.
 export ZSH=$HOME/.oh-my-zsh
+
+if [[ -r ~/.my_rc ]]; then
+  source ~/.my_rc
+fi
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
