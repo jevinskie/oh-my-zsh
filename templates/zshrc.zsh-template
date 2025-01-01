@@ -23,7 +23,7 @@ autoload -RUz compinit compaudit && compinit
 # fi
 
 # Path to your Oh My Zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+export ZSH="$HOME/.oh-my-zsh"
 
 if [[ -r ~/.my_rc ]]; then
   source ~/.my_rc
