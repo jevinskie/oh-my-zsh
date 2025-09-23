@@ -1,33 +1,38 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-# Automatically remove duplicates from these arrays
-typeset -U path cdpath fpath manpath
-
-# zmodload zsh/zprof
-zmodload zsh/param/private
-
-function source_bash {
-  emulate -L bash
-  builtin source "$@"
-}
-
-autoload -RUz compinit compaudit && compinit
-# autoload -Uz bashcompinit && bashcompinit
-
-# if ! { autoload -RUz compinit compaudit && compinit }; then
-# 	echo -e "\033[31m.zshrc initial compinit failed\033[39m" &>2
-# fi
-# if ! { autoload -Uz bashcompinit && bashcompinit }; then
-# 	echo -e "\033[31m.zshrc initial bashcompinit failed\033[39m" &>2
-# fi
-
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+
+#################
+### >>> JEVIN ###
+#################
+
+# Automatically remove duplicates from these arrays
+# There is some zsh ***magic*** that automatically turns them into env vars
+typeset -U path cdpath fpath manpath
+
+## need to run this more and figure out y slow
+## oh yeah and how to magically add async dataflow graphs into shell
+# zmodload zsh/zprof
+
+## dunno what this is for
+zmodload zsh/param/private
+
+autoload -RUz compinit compaudit && compinit
+# who can say how to make this stuff work??
+# autoload -Uz bashcompinit && bashcompinit
+
+## POORLY WRITTEN SHELL SOURCED HERE!!
+## My hook point into zsh init (also handles bash)
 if [[ -r ~/.my_rc ]]; then
-  source ~/.my_rc
+	source ~/.my_rc
 fi
+
+#################
+### <<< JEVIN ###
+#################
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -95,12 +100,7 @@ ZSH_THEME="candy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man-pages rsync )
-if [[ -d $ZSH/custom/plugins/mx ]]; then
-	plugins+=(mx)
-fi
-
-source $ZSH/oh-my-zsh.sh
+plugins=(git)
 
 # User configuration
 
@@ -131,21 +131,45 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+
+#################
+### >>> JEVIN ###
+#################
+
+## TO-FRIGGIN-DO:
+# figure out why zsh is so bad at "corrupting" zsh-history
+# and not trying any semblance of repair, or at least copying
+# the damn thing to a backup before making a blank history
+# Coda:
+### The user is probably wrong.
+
 export HISTSIZE=100000
 export HISTFILESIZE=$HISTSIZE
 export SAVEHIST=$HISTSIZE
 setopt HIST_FIND_NO_DUPS
 
-fpath+=~/.zfunc
+for f in ~/.zfunc ~/.rbenv/completions ~/.pyenv/completions; do
+  if [[ -e "$f" ]]; then
+  fpath+="$f"
+  fi
+done
+
+
+## why?
+# # The following lines were added by compinstall
+# zstyle :compinstall filename '/Users/jevin/.zshrc'
+
+# autoload -Uz compinit
+# compinit
+# # End of lines added by compinstall
+
 
 zmodload zsh/complist
 autoload -RUz compinit compaudit && compinit
-# autoload -Uz bashcompinit && bashcompinit
+autoload -Uz bashcompinit && bashcompinit
 
-if [[ -n "$ZSH_EXIT_AT_END_OF_ZSHRC" && ( "$ZSH_EXIT_AT_END_OF_ZSHRC" ) ]]; then
-  sw_vers
-  exit 3
-fi
+### Slow part ends here
+# zprof
 
 # deupe paths
 path=($path)
@@ -153,6 +177,9 @@ cdpath=($cdpath)
 fpath=($fpath)
 manpath=($manpath)
 
+## what is this?
 zstyle ':completion:*' menu select
 
-# zprof
+#################
+### <<< JEVIN ###
+#################
