@@ -102,6 +102,8 @@ ZSH_THEME="candy"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
+source $ZSH/oh-my-zsh.sh
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -150,7 +152,7 @@ setopt HIST_FIND_NO_DUPS
 
 for f in ~/.zfunc ~/.rbenv/completions ~/.pyenv/completions; do
   if [[ -e "$f" ]]; then
-  fpath+="$f"
+    fpath+="$f"
   fi
 done
 
