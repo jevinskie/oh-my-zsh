@@ -1,12 +1,12 @@
 # https://unix.stackexchange.com/a/9607
 candy_remote=" "
-if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-	candy_remote=" 🌩  "
-else
-  case $(ps -o comm= -p $PPID) in
-    sshd|*/sshd) candy_remote=" 🌩  ";;
-  esac
-fi
+#if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+#	candy_remote=" 🌩  "
+#else
+#  case $(ps -o comm= -p $PPID) in
+#    sshd|*/sshd) candy_remote=" 🌩  ";;
+#  esac
+#fi
 
 PROMPT=$'%{$fg_bold[green]%}%n@%m %{$fg[blue]%}%D{[%X]} %{$reset_color%}%{$fg[white]%}[%~]%{$reset_color%} $(git_prompt_info)\
 %{$fg[blue]%}->${candy_remote}%{$fg_bold[blue]%} %#%{$reset_color%} '
